@@ -1,0 +1,38 @@
+{% extends "padre.html" %}
+{% load static % }
+{% block contenido %}
+
+
+
+<div class="container text-center mt-5">
+
+    <h1>Formulario de Registro de Usuario</h1>
+    <h3>{{ mensaje }}</h3>
+
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center" style="min-height:30vh;">
+            <div class="col-sm-5">
+                <form id="login-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <table>
+                        
+                            {{ form.as_table }}
+                        </table>
+                            <input type="submit" class="btn btn-primary btn-block" value="Registrar Usuario">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+{% endblock %}
+

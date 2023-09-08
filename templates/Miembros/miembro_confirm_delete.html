@@ -1,0 +1,29 @@
+{% extends "padre.html" %}
+{% load static % }
+{% block contenido %}
+
+<br>
+<br>
+
+
+
+
+
+<div class="container text-center">
+    <h1>miembros</h1>
+</div>
+
+<br>
+<form method="post">{% csrf_token %}
+
+    ¿Estas seguro que deseas eliminar el miembro? "{{ object }}" ? <br>
+    <input type="submit" value="Si, estoy seguro" />
+
+    <br>
+    <br>
+    <br>
+    <br>
+</form>
+
+
+{% endblock %}

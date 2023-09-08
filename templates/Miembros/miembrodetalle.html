@@ -1,0 +1,43 @@
+{% extends "padre.html" %}
+{% load static % }
+{% block contenido %}
+
+<br>
+<br>
+
+
+
+
+
+<div class="container text-center">
+    <h1>Detalle del miembro</h1>
+</div>
+
+<br>
+<!--ver listaamplificadores-->
+<div class="container text-center">
+    <div class="row">
+            
+            <div class="col-sm-12 align-items-center">
+
+                    <p>Id: <i> {{ miembro.id }}</i></p>
+                    <p>Nombre: <i> {{ miembro.nombre }}</i></p>
+                    <p>Apellido: <i> {{ miembro.apellido }}</i></p> 
+                    <p>Email: <i> {{ miembro.email }}</i></p> 
+                    <p>Contraseña: <i> {{ miembro.contraseña }}</i></p> 
+
+                
+
+            </div>
+
+            <br>
+            <br>
+           
+                
+                </div>
+            </div>
+            <br>
+    </div>
+</div>
+
+{% endblock %}
