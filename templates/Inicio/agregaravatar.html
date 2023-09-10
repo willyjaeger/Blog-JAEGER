@@ -7,20 +7,20 @@
 <br>
 
 <div class="container text-center mt-6">
-    <h1>Editar Usuario {{ nombreusuario }}</h1>
+    <h1>Agregando Avatar de {{ nombreusuario }}</h1>
 
 
     <div class="container">
         
             <div class="row justify-content-center align-items-center" style="min-height:30vh;">
                     <div class="col-sm-7 ">
-                        <form action="{% url 'usuarioeditar' %}" method="POST"> {% csrf_token %}
+                        <form action="{% url 'agregaravatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                             <div class="card-body">
                                 <table>
                                 {{ form.as_table }} 
                             
                                 </table>
-                                <input type="submit" class="btn btn-primary text-center" value="Guardar">   
+                                <input type="submit" class="btn btn-primary text-center" value="Agregar Avatar">   
                     
                             </div>
                         </form>
@@ -40,12 +40,7 @@
 <br>
 <br>
 {% endblock %}
-<!----
-    {{ form.as_p }}
-    <br>
-    <div class="container text-center">
-    <button type="submit" class="btn btn-primary text-center">Guardar</button>
-    </div>
+
 
 
 

@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+# Create your models here.
 
 # Create your models here.
 class EntradasBlog(models.Model):
@@ -11,3 +13,9 @@ class EntradasBlog(models.Model):
     imagen=models.CharField(max_length=40,null=False,default="")
     def __str__(self):
         return f"{self.fecha} - {self.titulo} - {self.contenido} - {self.autor} "
+    
+
+
+
+
+

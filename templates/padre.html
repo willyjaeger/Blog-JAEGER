@@ -116,16 +116,17 @@
                         <a class="nav-link" href="#">Blog</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'miembrolista' %}">Miembros</a>
+                        <a class="nav-link" href="{% url 'usuarioeditar' %}">Tu Perfil</a>
                      </li>
-  
-                     <p>hola {{ user.username }}</p>   
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">logout</a>
                      </li>
                      {% else %}
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">login</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Registrate</a>
                      </li>
                      {% endif %}
                      
@@ -137,8 +138,19 @@
             </nav>
          </div>
 
-      </head>
-               <h3>{{  mensaje }}</h3>
+</head>
+<div style="display: flex; justify-content: flex-end;">
+   <div style="flex: 1; text-align: right; max-width: 94%;">
+      <h3>¡Hola {{ user.username }}!</h3>
+   </div>
+   <div style="flex: 2; text-align: center; max-width: 5%;">
+     
+       <img src="{{ avatar }}" alt="" style="width: 30px; height: 30px;">
+   </div>
+</div>
+
+     
+              
 
 
 

@@ -1,16 +1,33 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import   AuthenticationForm 
-from .forms import registro_usuario, editar_usuario
+from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarform  
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from .models import Avatar
 # Create your views here.
 
+def obtenerAvatar(request):
+
+    avatares=Avatar.objects.filter(user=request.user.id)
+    
+    if len(avatares)!=0:
+        
+        return avatares[0].imagen.url
+    else:
+        return "/media/avatars/avatarpordefecto.png"
+
+
+
 def inicio(request):
-    return render(request, 'Inicio/inicio.html')
+    avatar= obtenerAvatar(request)
+    return render(request, 'Inicio/inicio.html',{"avatar":obtenerAvatar(request)})
+
+   
 
 
 def login_request(request):
+    avatar= obtenerAvatar(request)
     if request.method=="POST":
         form=AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -31,6 +48,7 @@ def login_request(request):
     
 
 def register(request):
+    avatar= obtenerAvatar(request)
     if request.method=="POST":
         form=registro_usuario(request.POST)
         if form.is_valid():
@@ -39,31 +57,89 @@ def register(request):
             form.save() 
             return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {nombre_usuario} creado correctamente"})
         else:
+            avatar=Avatar.objects.filter(user=request.user.id)[0].img.url   
             return render(request,"Inicio/register.html", {"form":form, "mensaje":"Datos invalidos"})
     else:
         form=registro_usuario()
         return render(request,"Inicio/register.html", {"form":form})    
     
+
+#def usuarioeditar(request):
+#    usuario=request.user
+
+#     if request.method=="POST":
+#         form=editar_usuario(request.POST)
+#         if form.is_valid():
+#             info=form.cleaned_data
+#             usuario.email=info["email"]
+#             usuario.password1=info["password1"]
+#             usuario.password2=info["password2"]
+#             usuario.first_name=info["first_name"]
+#             usuario.last_name=info["last_name"]
+#             usuario.save()
+#             return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
+#         else:
+#             return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username, "mensaje":"Datos invalidos"})
+#     else:
+#         form=editar_usuario(instance=usuario)
+#         return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username})
+
+
+
 @login_required
 def usuarioeditar(request):
-    usuario=request.user
+    avatar= obtenerAvatar(request)
+    usuario = request.user
 
-    if request.method=="POST":
-        form=editar_usuario(request.POST)
+    if request.method == "POST":
+        form = EditarUsuarioForm(request.POST, instance=usuario)
         if form.is_valid():
-            info=form.cleaned_data
-            usuario.email=info["email"]
-            usuario.password1=info["password1"]
-            usuario.password2=info["password2"]
-            usuario.first_name=info["first_name"]
-            usuario.last_name=info["last_name"]
+            # Obtener los datos del formulario
+            form_data = form.cleaned_data
+
+            # Comparar los valores del formulario con los valores actuales del usuario
+            if form_data.get("username") != usuario.username:
+                usuario.username = form_data["username"]
+            if form_data.get("email") != usuario.email:
+                usuario.email = form_data["email"]
+            if form_data.get("first_name") != usuario.first_name:
+                usuario.first_name = form_data["first_name"]
+            if form_data.get("last_name") != usuario.last_name:
+                usuario.last_name = form_data["last_name"]
+
+            # Verificar si se ingresó una nueva contraseña
+            password = form_data.get("password")
+            if password:
+                usuario.set_password(password)
+
+            # Guardar los cambios en el usuario
             usuario.save()
-            return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
-        else:
-            return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username, "mensaje":"Datos invalidos"})
+
+            return redirect("inicio")  # Redirigir a la página de inicio o a donde desees
     else:
-        form=editar_usuario(instance=usuario)
-        return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username})
+        form = EditarUsuarioForm(instance=usuario)
+
+    return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario": usuario.username})
 
 
 
+@login_required
+def agregaravatar(request):
+    avatar = obtenerAvatar(request)
+
+    if request.method == "POST":
+        form = Avatarform(request.POST, request.FILES)
+        if form.is_valid():
+            avatar_nuevo = Avatar(user=request.user, imagen=request.FILES["imagen"])
+
+            avatar_viejo = Avatar.objects.filter(user=request.user)
+            if avatar_viejo.exists():
+                avatar_viejo[0].delete()
+            
+            avatar_nuevo.save()
+            return render(request, "inicio.html", {"mensaje": f"Avatar agregado correctamente", "avatar": obtenerAvatar(request)})
+        else:
+            return render(request, "Inicio/agregaravatar.html", {"form": form, "usuario": request.user, "mensaje": "Error al agregar el avatar"})
+    else:
+        form = Avatarform()
+        return render(request, "Inicio/agregaravatar.html", {"form": form, "usuario": request.user, "avatar": obtenerAvatar(request)})
