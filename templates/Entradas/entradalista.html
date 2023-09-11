@@ -1,0 +1,31 @@
+{% extends "padre.html" %}
+{% load static %}
+
+{% block titulo %}
+    <h1>Lista de Entradas</h1>
+{% endblock %}
+
+{% block contenido %}
+    <div class="container">
+        <div class="row">
+            <p>Número de entradas: {{ entradas|length }}</p>
+            {% for entrada in entradas %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ entrada.image.url }}" alt="{{ entrada.titulo }}" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ entrada.titulo }}</h2>
+                            <h4 class="card-subtitle mb-2 text-muted">{{ entrada.subtitulo }}</h4>
+                            <p class="card-text">{{ entrada.contenido }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Autor: {{ entrada.autor }}</small>
+                            <br>
+                            <small class="text-muted">Fecha de Creación: {{ entrada.fecha }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "padre.html" %}
+{% load static %}
+<div class="container text-center mt-8"></div>
+<h1>{% block titulo %}
+    {% if form.instance.pk %}
+        <h1>    Editar Entrada </h1>
+
+    {% else %}
+       <h1> Crear Entrada </h1>
+    {% endif %}
+{% endblock %}
+</h1>
+    <h3>{{ mensaje }}</h3>
+    {% block contenido %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+            <div class="col-sm-8">
+                <form id="login-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body col-sm-12">
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        <input type="submit" class="btn btn-primary btn-block" value="Guardar
+                        ">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

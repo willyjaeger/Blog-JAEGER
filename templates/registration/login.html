@@ -1,38 +1,38 @@
 {% extends "padre.html" %}
-{% load static % }
+{% load static %}
+
+{% block avatar %}
+    <img src="{{ avatar }}" alt="" style="width: 30px; height: 30px;">
+{% endblock %}
+
 {% block contenido %}
-
 <div class="container text-center mt-5">
-
     <h1>Login</h1>
     <h3>{{ mensaje }}</h3>
 
     <div class="container">
-
-        <div class="row justify-content-center align-items-center" style="min-height:30vh;">
+        <div class="row justify-content-center align-items-center" style="min-height: 30vh;">
             <div class="col-sm-4">
                 <form id="login-form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="card-body">
                         <table>
-                        
                             {{ form.as_table }}
                         </table>
-                            <input type="submit" class="btn btn-primary btn-block" value="Ingresar">
+                        <input type="submit" class="btn btn-primary btn-block" value="Ingresar">
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
-
 
 <br>
 <br>
 <br>
 <br>
 {% endblock %}
+
 
 
 

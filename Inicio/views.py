@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import   AuthenticationForm 
-from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarform  
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarform
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import Avatar
+
+# ...
+
 # Create your views here.
 
 def obtenerAvatar(request):
@@ -21,31 +24,35 @@ def obtenerAvatar(request):
 
 def inicio(request):
     avatar= obtenerAvatar(request)
-    return render(request, 'Inicio/inicio.html',{"avatar":obtenerAvatar(request)})
+    return render(request, 'Entradas/entradalista.html',{"avatar":obtenerAvatar(request)})
 
    
 
 
+    
 def login_request(request):
     avatar= obtenerAvatar(request)
-    if request.method=="POST":
-        form=AuthenticationForm(request, data=request.POST)
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            info=form.cleaned_data
-            usu=info["username"]
-            clave=info["password"]
-            usuario=authenticate(username=usu, password=clave)
+            info = form.cleaned_data
+            usu = info["username"]
+            clave = info["password"]
+            usuario = authenticate(username=usu, password=clave)
             if usuario is not None:
                 login(request, usuario)
-                return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {usu} logueado correctamente"})
+                return render(request, "Inicio/inicio.html", {"mensaje": f"Usuario {usu} logueado correctamente", "avatar": obtenerAvatar(request)})
             else:
-                return render(request,"Inicio/login.html", {"form":form, "mensaje":"Datos invalidos"})
+                return render(request, "registration/login.html", {"form": form, "mensaje": "Datos inválidos", "avatar": avatar})
+
         else:
-            return render(request,"Inicio/login.html", {"form":form, "mensaje":"Datos invalidos"})
+            return render(request, "registration/login.html", {"form": form, "mensaje": "Datos inválidos", "avatar": avatar})
+
     else:
-        form=AuthenticationForm()
-        return render(request,"Inicio/login.html", {"form":form})
-    
+        form = AuthenticationForm()
+        return render(request, "registration/login.html", {"form": form, "avatar": obtenerAvatar(request)})
+
+
 
 def register(request):
     avatar= obtenerAvatar(request)
@@ -55,37 +62,16 @@ def register(request):
             info=form.cleaned_data
             nombre_usuario=info["username"]
             form.save() 
-            return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {nombre_usuario} creado correctamente"})
+            return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {nombre_usuario} creado correctamente", "avatar": obtenerAvatar(request)})
         else:
             avatar=Avatar.objects.filter(user=request.user.id)[0].img.url   
-            return render(request,"Inicio/register.html", {"form":form, "mensaje":"Datos invalidos"})
+            return render(request,"Inicio/register.html", {"form": form, "mensaje": "Datos inválidos", "avatar": avatar})
+
     else:
         form=registro_usuario()
-        return render(request,"Inicio/register.html", {"form":form})    
-    
-
-#def usuarioeditar(request):
-#    usuario=request.user
-
-#     if request.method=="POST":
-#         form=editar_usuario(request.POST)
-#         if form.is_valid():
-#             info=form.cleaned_data
-#             usuario.email=info["email"]
-#             usuario.password1=info["password1"]
-#             usuario.password2=info["password2"]
-#             usuario.first_name=info["first_name"]
-#             usuario.last_name=info["last_name"]
-#             usuario.save()
-#             return render(request, "Inicio/inicio.html", {"mensaje":f"Usuario {usuario.username} editado correctamente"})
-#         else:
-#             return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username, "mensaje":"Datos invalidos"})
-#     else:
-#         form=editar_usuario(instance=usuario)
-#         return render(request, "Inicio/usuarioeditar.html", {"form": form, "nombreusuario":usuario.username})
-
-
-
+        return render(request,"Inicio/register.html", {"form": form, "avatar": obtenerAvatar(request)})
+  
+ 
 @login_required
 def usuarioeditar(request):
     avatar= obtenerAvatar(request)
@@ -143,3 +129,9 @@ def agregaravatar(request):
     else:
         form = Avatarform()
         return render(request, "Inicio/agregaravatar.html", {"form": form, "usuario": request.user, "avatar": obtenerAvatar(request)})
+
+
+
+
+
+

@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.contrib.auth import views as auth_views
 
 
 
@@ -26,8 +26,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Inicio.urls')),
-    path('Entradas/',include('Entradas.urls')),
-    path('Miembros/',include('Miembros.urls')),
+    path('',include('Entradas.urls')),
+    path('',include('Miembros.urls')),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
 
          
 ]
