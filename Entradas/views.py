@@ -12,6 +12,9 @@ def entradaLista(request):
     return render(request, 'Entradas/entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas})
 
 
+
+
+
 @login_required
 def entradaCrear(request):
     if request.method == 'POST':

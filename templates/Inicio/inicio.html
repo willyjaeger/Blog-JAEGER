@@ -1,50 +1,62 @@
 {% extends "padre.html" %}
-{% load static % }
+{% load static %}
 
-{% block contenido %}   
+{% block contenido %}
+    <br>
+    <br>
+    <br>
 
-<br>
-<br>
-<br>
-
-<div class="container text-center">
+    <div class="container text-center">
         <h1>Bienvenido</h1>
         <br>
         <br>
         <h3>{{ mensaje }}</h3>
-</div>
+    </div>
 
-<div class="container">
+    
+    <div class="container">
+        <form id="login-form" style="width: 50vw; margin-left: 20vw;" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-<form id="login-form" style=" width: 50vw; margin-left : 20vw;" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-sm-12 align-items-center">
+                        <h1>Algunas Noticias</h1>
+                        <div class="iframe-container" style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%;">
+                            <iframe src="https://www.lanacion.com.ar/deportes/rugby/" width="1200" height="600"></iframe>
+                        </div>
 
 
-    <div class="container text-center">
-        <div class="row">
-                <div class="col-sm-12 align-items-center">
-                    <div class="card-body">
+                        <div class="card-body">
+
+
+                            
+                         
+                            
+                            {% if noticias %}
+                            <ul>
+                                {% for noticia in noticias %}
+                                <li>
+                                    <h2><a href="{{ noticia.enlace }}">{{ noticia.titulo }}</a></h2>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p>{{ error_message }}</p>
+                            {% endif %}
+                            
+                                                   
+                        </div>
                     </div>
                 </div>
                 <br>
                 <br>
-                
                 <br>
-        </div>
+            </div>
+        </form>
     </div>
-    
-    
-    
-
-
-
-</form>
-</div>
-<br>
-
-
-<br>
-<br>
-<br>
-<br>
-{% endblock%}
-
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}

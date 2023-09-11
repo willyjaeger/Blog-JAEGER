@@ -5,10 +5,18 @@ from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarfo
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import Avatar
+import requests
+from bs4 import BeautifulSoup
 
 # ...
 
 # Create your views here.
+
+
+
+
+
+
 
 def obtenerAvatar(request):
 
@@ -24,7 +32,7 @@ def obtenerAvatar(request):
 
 def inicio(request):
     avatar= obtenerAvatar(request)
-    return render(request, 'Entradas/entradalista.html',{"avatar":obtenerAvatar(request)})
+    return render(request, 'Inicio/inicio.html',{"avatar":obtenerAvatar(request)})
 
    
 
