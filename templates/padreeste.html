@@ -86,7 +86,11 @@
     </style>
  
 
+         </head>
+         <body>
 
+            <!-- Aquí puedes añadir el contenido de tu página -->
+         </body>
 
 
    <body>
@@ -109,7 +113,7 @@
                         <a class="nav-link" href="#">Acerca</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" href="{% url 'entradalista' %}">Blog</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'usuarioeditar' %}">Tu Perfil</a>
@@ -160,104 +164,149 @@
 
 
       </div>
+      <div class="container text-center">
+         <div class="row">
+                 
+            <div class="col-sm-12 align-items-center">
+               {% block titulo %} {% endblock %}
+            </div>
+
+         </div>
+      </div>
+
+      {%  block contenido %}
+
+<h1></h1>
+<br>
+<br>  
+<br>
+<br>
+
+
       <!-- recientes section start --> 
       <div class="about_section layout_padding">
          <div class="container">
             <div class="row">
                <div class="col-lg-8 col-sm-12">
-                  {% block contenido-Principal %}
+                     <h1> a ver si sacamo esto</h1>
+               </div>
+<!-------->
 
-
-                  {% endblock %}
-
-                  </div>
-               </div> 
-
-<!------->
             <div class="col-lg-4 col-sm-12">
                <div class="newsletter_main">
                   <h1 class="recent_taital">Posteos Recientes</h1>
-                  {% for entrada in entradas_recientes %}
                   <div class="recent_box">
                      <div class="recent_left">
-                        <div class="image_6"><img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" type="image/jpg"></div>
+                        <div class="image_6"><img src="{% static 'images/28972_101526326562804_342584_n.jpg' %}" type="image/jpg"> </div>
                      </div>
                      <div class="recent_right">
-                        <h3 class="consectetur_text">{{ entrada.titulo }}</h3>
-                        <p class="dolor_text">{{ entrada.contenido|slice:":35" }}{% if entrada.contenido|length > 35 %}....{% endif %}
-                           <div class="read_bt"><a href="{% url 'Entradas:entradadetalle' entrada.id %}" style="font-size: 14px;; margin-top: 5px;">Leer Más</a></div>
-
-                        </p>
-                        
+                        <h3 class="consectetur_text">Posteo 1</h3>
+                        <p class="dolor_text">ipsum dolor sit amet, consectetur adipiscing </p>
                      </div>
                   </div>
-                  {% endfor %}
-            </div>
-</div>
+                  <div class="recent_box">
+                     <div class="recent_left">
+                        <div class="image_6"><img src="{% static 'images/28972_101526323229471_1669885_n.jpg' %}"></div>
+                     </div>
+                     <div class="recent_right">
+                        <h3 class="consectetur_text">Posteo 2</h3>
+                        <p class="dolor_text">ipsum dolor sit amet, consectetur adipiscing </p>
+                     </div>
+                  </div>
+                  <div class="recent_box">
+                     <div class="recent_left">
+                        <div class="image_6"><img src="{% static 'images/28972_101532559895514_7587556_n.jpg' %}"></div>
+                     </div>
+                     <div class="recent_right">
+                        <h3 class="consectetur_text">Posteo 3</h3>
+                        <p class="dolor_text">ipsum dolor sit amet, consectetur adipiscing </p>
+                     </div>
+                  </div>
+                  <div class="recent_box">
+                     <div class="recent_left">
+                        <div class="image_6"><img src="{% static 'images/28972_101532556562181_2045805_n.jpg' %}"></div>
+                     </div>
+                     <div class="recent_right">
+                        <h3 class="consectetur_text">Posteo 4</h3>
+                        <p class="dolor_text">ipsum dolor sit amet, consectetur adipiscing </p>
+                     </div>
+                  </div>
+              </div>
+
+<!------->
 
       </div>
       <!-- recientes section end --> 
       <!-- blog section start --> 
-     
-<div class="about_section layout_padding">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-8 col-sm-12">
-            <!-- Contenido personalizable: -->
-            {% block contenido %}
-
-
-            {% endblock %}
-
-            <!-------hasta aca---------------->
-         </div>
-         <div class="col-lg-4 col-sm-12">
-         </div>
-      </div>
-   </div>
-</div>
-<!-- newsletter section end -->
-      <!-- newsletter section end --> 
-
-
-
-      <!-- tag section start -->
-      <!-- tag section end -->
-      <!-- contact section start -->
-      <div class="contact_section layout_padding">
+      <div class="about_section layout_padding">
          <div class="container">
             <div class="row">
-               <div class="col-md-6">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                     </div>
-                  </div>
+               <div class="col-lg-8 col-sm-12">
+
                </div>
-               <div class="col-md-6">
-                  <div class="mail_section">
-                     <h1 class="contact_taital">Contactanos</h1>
-                     <input type="" class="email_text" placeholder="Nombre" name="Name">
-                     <input type="" class="email_text" placeholder="Telefono" name="Phone">
-                     <input type="" class="email_text" placeholder="Email" name="Email">
-                     <textarea class="massage_text" placeholder="Mensaje" rows="5" id="comment" name="Message"></textarea>
-                     <div class="send_bt"><a href="#">enviar</a></div>
+               <div class="col-lg-4 col-sm-12">
+                  <div class="about_main">
+                     <h1 class="follow_text">Seguinos</h1>
+                     <div class="follow_icon">
+                        <ul>
+                           <li><a href="https://www.facebook.com/lanoventaysiete.detorcuato"><img src="{% static 'images/fb-icon-1.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/twitter-icon-1.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/linkedin-icon-1.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/instagram-icon-1.png' %}"></a></li>
+                        </ul>
+                     </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
+
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 col-sm-12">
+
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- blog section end --> 
+      <!-- newsletter section start --> 
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8 col-sm-12">
+                  
+               </div>
+               <div class="col-lg-4 col-sm-12">
+                  <h1> aca podria ir algo</h1>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- newsletter section end --> 
+      <!-- recent section start --> 
+      <div class="about_section layout_padding">
+         <div class="container">
+            <div class="row">
+
+            </div>
+         </div>
+      </div>
+      <!-- recent section end --> 
+      <!-- tag section start -->
+      <div class="tag_section layout_padding">
+         <div class="container">
+            <h1 class="tag_taital">nada</h1>
+            <div class="tag_bt">
+               
+            </div>
+         </div>
+      </div>
+      <!-- tag section end -->
+      {% endblock %}
+      <!-- contact section start -->
+      
       <!-- contact section end -->
       <!-- footer section start -->
       <div class="footer_section layout_padding">
@@ -275,9 +324,9 @@
             <div class="contact_menu">
                <ul>
                   <li><a href="#"><img src="images/call-icon.png"></a></li>
-                  <li><a href="#">Call : +01 1234567890</a></li>
+                  <li><a href="#">Tel : +54 9 11 5096 0086 </a></li>
                   <li><a href="blog.html"><img src="images/mail-icon.png"></a></li>
-                  <li><a href="features.html">demo@gmail.com</a></li>
+                  <li><a href="features.html">guillermo.jaeger@gmail.com</a></li>
                </ul>
             </div>
          </div>

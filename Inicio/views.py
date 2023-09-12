@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarform
@@ -7,16 +7,11 @@ from django.contrib.auth.decorators import login_required
 from .models import Avatar
 import requests
 from bs4 import BeautifulSoup
+from Entradas.models import Entrada
 
 # ...
 
 # Create your views here.
-
-
-
-
-
-
 
 def obtenerAvatar(request):
 
@@ -30,9 +25,16 @@ def obtenerAvatar(request):
 
 
 
+
+def posteosRecientes():
+    entradas_recientes = Entrada.objects.order_by('-id')[:4]  # Obtener las últimas 4 entradas (o las que desees)
+    return entradas_recientes
+
 def inicio(request):
-    avatar= obtenerAvatar(request)
-    return render(request, 'Inicio/inicio.html',{"avatar":obtenerAvatar(request)})
+    avatar = obtenerAvatar(request)
+    entradas_recientes = posteosRecientes()
+    return render(request, 'Inicio/inicio.html', {"avatar": avatar, "entradas_recientes": entradas_recientes})
+
 
    
 

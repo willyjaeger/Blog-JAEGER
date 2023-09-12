@@ -5,15 +5,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
+
+def entradaDetalle(request, pk):
+    entrada = get_object_or_404(Entrada, pk=pk)
+    return render(request, 'Entradas/entradadetalle.html', {'entrada': entrada})
+
 def entradaLista(request):
     entradas = Entrada.objects.all()
     num_entradas = len(entradas)
-    print("Número de entradas:", num_entradas)  # Mensaje de depuración
     return render(request, 'Entradas/entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas})
-
-
-
-
 
 @login_required
 def entradaCrear(request):
@@ -31,9 +31,7 @@ def entradaCrear(request):
     return render(request, 'Entradas/entradaformulario.html', {'form': form})
 
 
-def entradaDetalle(request, pk):
-    entrada = get_object_or_404(Entrada, pk=pk)
-    return render(request, 'Entradas/entradadetalle.html', {'entrada': entrada})
+
 
 @login_required
 def entradaEditar(request, pk):

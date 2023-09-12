@@ -3,17 +3,38 @@
 
 {% block titulo %}
     <h1>{{ entrada.titulo }}</h1>
-    <h3>{{ <entrada class="subtitulo"></entrada> }}</h3>
+    <h3>{{ entrada.subtitulo }}</h3>
 {% endblock %}
 
-{% block contenido %}
+{% block contenido-Principal %}
     <div class="container">
-        <p>Autor: {{ entrada.autor }}</p>
-        <p>Fecha de Creación: {{ entrada.fecha }}</p>
-        <img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" style="max-width: 100%;">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Contenido principal de la entrada -->
+                <p>Autor: {{ entrada.autor }}</p>
+                <p>Fecha de Creación: {{ entrada.fecha }}</p>
+                <img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" style="max-width: 100%;">
 
-        <div>
-            <p>{{ entrada.contenido }}</p>
+                <div>
+                    <p>{{ entrada.contenido }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- Aquí puedes colocar cualquier contenido relacionado con "Posteos Recientes" -->
+                <h1 class="recent_taital">Posteos Recientes</h1>
+                {% for entrada_recente in entradas_recientes %}
+                <div class="recent_box">
+                    <div class="recent_left">
+                        <div class="image_6"><img src="{{ entrada_recente.imagen.url }}" alt="{{ entrada_recente.titulo }}" type="image/jpg"></div>
+                    </div>
+                    <div class="recent_right">
+                        <h3 class="consectetur_text">{{ entrada_recente.titulo }}</h3>
+                        <p class="dolor_text">{{ entrada_recente.contenido|slice:":35" }}{% if entrada_recente.contenido|length > 35 %}....{% endif %}</p>
+                        <div class="read_bt"><a href="{% url 'Entradas:entradadetalle' entrada_recente.id %}" style="font-size: 14px; margin-top: 5px;">Leer Más</a></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,62 +1,61 @@
 {% extends "padre.html" %}
 {% load static %}
 
+
+ {% block contenido-Principal %}
+                 <div class="about_img"><img src="{% static 'images/10452845_752173014831462_1916323651311923862_o.jpg' %}" type="image/jpg"></div>
+                  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+                  <p class="post_text">Post By : 09/06/2019</p>
+                  <h2 class="most_text">Scrum en la cancha 1 <br></h2>
+                  <p class="lorem_text">No me puedo acordar que equipo es!</p>
+                  <div class="social_icon_main">
+                     <div class="social_icon">
+                        <ul>
+                           <li><a href="https://www.facebook.com/lanoventaysiete.detorcuato"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+                           <li><a href="#"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+                        </ul>
+                     </div>
+                     <!--<div class="read_bt"><a href="#">Leer Mas</a></div>-->
+
+ {% endblock %}
+ 
+
 {% block contenido %}
-    <br>
-    <br>
-    <br>
+   <!-- Tu contenido personalizado para la sección newsletter -->
 
-    <div class="container text-center">
-        <h1>Bienvenido</h1>
-        <br>
-        <br>
-        <h3>{{ mensaje }}</h3>
-    </div>
-
-    
-    <div class="container">
-        <form id="login-form" style="width: 50vw; margin-left: 20vw;" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <div class="container text-center">
-                <div class="row">
-                    <div class="col-sm-12 align-items-center">
-                        <h1>Algunas Noticias</h1>
-                        <div class="iframe-container" style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%;">
-                            <iframe src="https://www.lanacion.com.ar/deportes/rugby/" width="1200" height="600"></iframe>
-                        </div>
-
-
-                        <div class="card-body">
-
-
-                            
-                         
-                            
-                            {% if noticias %}
-                            <ul>
-                                {% for noticia in noticias %}
-                                <li>
-                                    <h2><a href="{{ noticia.enlace }}">{{ noticia.titulo }}</a></h2>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                            {% else %}
-                            <p>{{ error_message }}</p>
-                            {% endif %}
-                            
-                                                   
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <br>
-                <br>
-            </div>
-        </form>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+   <div class="tu_clase">
+    <img src="{% static 'images/13113011_1175025305875285_3659323548521853765_o.jpg' %}" alt="Descripción de la imagen">
+  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+  <p class="post_text">Post By : 09/06/2019</p>
+  <h2 class="most_text">Partido La Plata - Hindu <br></h2>
+  <p class="lorem_text">Foto del Arbitro en la charla previa al partido con los capitanes</p>
+  <div class="social_icon_main">
+     <div class="social_icon">
+        <ul>
+           <li><a href="https://www.facebook.com/lanoventaysiete.detorcuato"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+           <li><a href="#"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+           <li><a href="#"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+        </ul>
+     </div>
+    <!--<div class="read_bt"><a href="#">Leer Mas</a></div>-->
+  </div>
+</div>
+<div class="tu_clase">
+    <img src="{% static 'images/14590118_1306179902759824_1155919796548668201_o.jpg' %}" alt="Descripción de la imagen">
+  <div class="like_icon"><img src="{% static 'images/like-icon.png' %}"></div>
+  <p class="post_text">Post By : 09/06/2019</p>
+  <h2 class="most_text">Partido Hindu - Alumni <br></h2>
+  <p class="lorem_text">La cara de Mati No tiene desperdicio</p>
+  <div class="social_icon_main">
+     <div class="social_icon">
+        <ul>
+           <li><a href="https://www.facebook.com/lanoventaysiete.detorcuato"><img src="{% static 'images/fb-icon.png' %}"></a></li>
+           <li><a href="#"><img src="{% static 'images/twitter-icon.png' %}"></a></li>
+           <li><a href="#"><img src="{% static 'images/instagram-icon.png' %}"></a></li>
+        </ul>
+     </div>
+    <!--<div class="read_bt"><a href="#">Leer Mas</a></div>-->
+  </div>
+</div>
 {% endblock %}
