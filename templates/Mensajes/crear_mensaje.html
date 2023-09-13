@@ -1,0 +1,27 @@
+
+{% load static %}
+<div class="container text-center mt-8"></div>
+<h1>{% block titulo %}
+   Mensaje
+{% endblock %}
+</h1>
+    <h3>{{ mensaje }}</h3>
+    {% block contenido-principal %}
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
+            <div class="col-sm-8">
+                <form id="login-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="card-body col-sm-12">
+                        <table>
+                            {{ form.destinatario.as_hidden }}
+                            {{ form.as_table }}
+                        </table>
+                        <input type="submit" class="btn btn-primary btn-block" value="Enviar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

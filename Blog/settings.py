@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Inicio',
     'Entradas',
     'Miembros',
+    'Mensajes',
 ]
 
 MIDDLEWARE = [
