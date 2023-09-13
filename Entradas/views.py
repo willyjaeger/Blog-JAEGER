@@ -6,26 +6,26 @@ from django.contrib import messages
 from Inicio.views import obtenerAvatar, posteosRecientes, todaslasEntradas
 from Inicio.models import Avatar
  
-
+@login_required
 def entradaDetalle(request, pk):
     avatar = obtenerAvatar(request)
     entrada = get_object_or_404(Entrada, pk=pk)
     entradas_recientes = posteosRecientes()
     return render(request, 'Entradas/entradadetalle.html', {'entrada': entrada, "entradas_recientes": entradas_recientes})
 
+from .models import Entrada
+
+
+@login_required
 def entradaLista(request):
-    entradas = Entrada.objects.all()
-    print(entradas)  # Verifica si se están recuperando las entradas
+    entradas = Entrada.objects.all().order_by('-fecha')
+    # print(entradas)  # Verifica si se están recuperando las entradas
     num_entradas = len(entradas)
     entradas_recientes = posteosRecientes()
     return render(request, 'Entradas/entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas, "entradas_recientes": entradas_recientes})
 
 
-# def entradaLista(request):
-#     avatar = obtenerAvatar(request)
-#     entradas = todaslasEntradas()
-#     num_entradas = len(entradas)
-#     return render(request, 'Entradas/entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas, "avatar": avatar})
+
 
 
 @login_required

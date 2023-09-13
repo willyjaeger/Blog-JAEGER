@@ -98,7 +98,7 @@
                         <a class="nav-link" href="{% url 'inicio' %}">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'Mensajes:crear_mensaje' %}">Mensajes</a>
+                        <a class="nav-link" href="{% url 'Mensajes:ver_mensajes' %}">Mensajes</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'Entradas:entradalista' %}">Blog</a>
@@ -111,7 +111,7 @@
                      </li>
                      {% else %}
                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">login</a>
+                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'register' %}">Registrate</a>
@@ -228,13 +228,14 @@
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
-            <div class="footer_logo"><a href="inicio.html"><img src="{% static 'images/footer-logo.png' %}"></a></div>
+            <div class="footer_logo"><a href="{% url 'inicio' %}">
+               <!--<img src="{% static 'images/footer-logo.png' %}"></a></div> -->
             <div class="footer_menu">
                <ul>                                                
-                  <li><a href="inicio.html">Home</a></li>
-                  <li><a href="about.html">Acerca de</a></li>
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="features.html">Caracteristicas</a></li>
+                  <li><a href="{% url 'inicio' %}">Home</a></li>
+                  <!--<li><a href="about.html">Acerca de</a></li>-->
+                  <!-- <li><a href="blog.html">Blog</a></li>
+                  <li><a href="features.html">Caracteristicas</a></li> -->
                   <li><a href="contact.html">Contactame</a></li>
                </ul>
             </div>
@@ -242,8 +243,8 @@
                <ul>
                   <li><a href="#"><img src="{% static 'images/call-icon.png' %}"></a></li>
                   <li><a href="#">Call : +54 9 11-5096-0086</a></li>
-                  <li><a href="blog.html"><img src="{% static 'images/mail-icon.png' %}"></a></li>
-                  <li><a href="features.html">guillermo.jaeger@gmail.com</a></li>
+                  <li><a href="#"><img src="{% static 'images/mail-icon.png' %}"></a></li>
+                  <li><a href="#">guillermo.jaeger@gmail.com</a></li>
                </ul>
             </div>
          </div>
