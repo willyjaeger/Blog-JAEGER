@@ -2,30 +2,60 @@
 {% load static %}
 
 {% block titulo %}
-    <h1>Lista de Entradas</h1>
-{% endblock %}
 
-{% block contenido %}
+       Blog 
+
+      
+    {% endblock %}
+    
+{% block contenido-principal %}
+
+
+<div class="about_section layout_padding">
+    <a href="{% url 'Entradas:entradacrear' %}" class="btn btn-primary btn-block">Nuevo Ingreso</a>
+    <br>
     <div class="container">
         <div class="row">
-            <p>Número de entradas: {{ entradas|length }}</p>
+            <div class="col-lg-8 col-sm-12">
             {% for entrada in entradas %}
-                <div class="col-md-6 mb-4">
-                    <div class="card">
-                        <img src="{{ entrada.image.url }}" alt="{{ entrada.titulo }}" class="card-img-top">
-                        <div class="card-body">
-                            <h2 class="card-title">{{ entrada.titulo }}</h2>
-                            <h4 class="card-subtitle mb-2 text-muted">{{ entrada.subtitulo }}</h4>
-                            <p class="card-text">{{ entrada.contenido }}</p>
-                        </div>
-                        <div class="card-footer">
-                            <small class="text-muted">Autor: {{ entrada.autor }}</small>
-                            <br>
-                            <small class="text-muted">Fecha de Creación: {{ entrada.fecha }}</small>
-                        </div>
+                <div class="about_img"><img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ entrada.titulo }}</h2>
+                        <h4 class="card-subtitle mb-2 text-muted">{{ entrada.subtitulo }}</h4>
+                        <p class="card-text">{{ entrada.contenido }}</p>
                     </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Autor: {{ entrada.autor }}</small>
+                        <br>
+                        <small class="text-muted">Fecha de Creación: {{ entrada.fecha }}</small>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             {% endfor %}
-        </div>
-    </div>
+                    </div>
+      <!-----Sector derecho de la pantalla, con los ultimos posteos-->
+                <div class="col-lg-4 col-sm-12">
+                    <div class="newsletter_main">
+                    <h1 class="recent_taital">Posteos Recientes</h1>
+                    {% for entrada in entradas_recientes %}
+                    <div class="recent_box">
+                        <div class="recent_left">
+                            <div class="image_6"><img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" type="image/jpg"></div>
+                        </div>
+                        <div class="recent_right">
+                            <h3 class="consectetur_text">{{ entrada.titulo }}</h3>
+                            <p class="dolor_text">{{ entrada.contenido|slice:":35" }}{% if entrada.contenido|length > 35 %}....{% endif %}
+                                <div class="read_bt"><a href="{% url 'Entradas:entradadetalle' entrada.id %}" style="font-size: 14px;; margin-top: 5px;">Leer Más</a></div>
+
+                            </p>
+                            
+                        </div>
+                    </div>
+                    {% endfor %}
+     </div>
+  </div>
+</div>
 {% endblock %}

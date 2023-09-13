@@ -10,8 +10,8 @@ app_name = 'Entradas'  # Esto establece el espacio de nombres de la aplicación
 
 
 urlpatterns = [
-    path('Entradas/entradalista', views.entradaLista, name='entradalista'),
-    path('Entradas/crear/', views.entradaCrear, name='entradacrear'),
+    path('Entradas/entradalista/', views.entradaLista, name='entradalista'),
+    path('Entradas/entradaCrear/', views.entradaCrear, name='entradacrear'),
     path('Entradas/editar/<int:entrada_id>/', views.entradaEditar, name='entradaeditar'),
     path('Entradas/<int:pk>/', views.entradaDetalle, name='entradadetalle'),
     path('Entradas/<int:pk>/edit/', views.entradaEditar, name='entradaeditar'),

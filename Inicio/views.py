@@ -4,10 +4,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import registro_usuario, EditarUsuarioForm, editar_usuario, Avatarform
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .models import Avatar
+from .models import Avatar 
 import requests
 from bs4 import BeautifulSoup
 from Entradas.models import Entrada
+
 
 # ...
 
@@ -35,7 +36,10 @@ def inicio(request):
     entradas_recientes = posteosRecientes()
     return render(request, 'Inicio/inicio.html', {"avatar": avatar, "entradas_recientes": entradas_recientes})
 
-
+def todaslasEntradas(request):
+    entradas = Entrada.objects.all()
+    num_entradas = len(entradas)
+    return render(request, 'Entradas/entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas})
    
 
 

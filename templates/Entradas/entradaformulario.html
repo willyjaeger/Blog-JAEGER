@@ -3,15 +3,15 @@
 <div class="container text-center mt-8"></div>
 <h1>{% block titulo %}
     {% if form.instance.pk %}
-        <h1>    Editar Entrada </h1>
+         Editar Entrada 
 
     {% else %}
-       <h1> Crear Entrada </h1>
+        Crear Entrada Nueva
     {% endif %}
 {% endblock %}
 </h1>
     <h3>{{ mensaje }}</h3>
-    {% block contenido %}
+    {% block contenido-principal %}
     <div class="container">
         <div class="row justify-content-center align-items-center" style="min-height: 20vh;">
             <div class="col-sm-8">
@@ -21,7 +21,7 @@
                         <table>
                             {{ form.as_table }}
                         </table>
-                        <input type="submit" class="btn btn-primary btn-block" value="Guardar
+                        <input type="submit" class="btn btn-primary btn-block" value="Guardar"
                         ">
                     </div>
                 </form>

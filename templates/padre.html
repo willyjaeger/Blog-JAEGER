@@ -63,23 +63,15 @@
  
       /* Aquí creamos el elemento p con el texto que queremos mostrar */
       .foto p {
-        /* Aquí le damos una posición absoluta al texto */
         position: absolute;
-        /* Aquí le damos un color al texto */
         color: rgb(12, 11, 11);
-         /* Aquí le damos una fuente al texto */
         font-family: "Arial", sans-serif;
-        /* Aquí le damos un tamaño al texto */
         font-size: 30px;
-        /* Aquí le damos un margen al texto */
         margin: 5px;
-        /* Aquí le damos una alineación centrada al texto */
         text-align: center;
-        /* Aquí le damos una posición vertical al texto */
         top: 50%;
-        /* Aquí le damos una posición horizontal al texto */
         left: 50%;
-        /* Aquí le damos una transformación al texto para centrarlo */
+       
         transform: translate(-50%, -50%);
       }
     
@@ -109,7 +101,7 @@
                         <a class="nav-link" href="#">Acerca</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
+                        <a class="nav-link" href="{% url 'Entradas:entradalista' %}">Blog</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'usuarioeditar' %}">Tu Perfil</a>
@@ -157,46 +149,20 @@
          </header>
    <!-- header section end -->
  
-
+   <div style="text-align: center; margin-bottom: 5px;">
+      <br>
+          <h2 class="most_text">{% block titulo %}    {% endblock %}</h2>
+      
+  </div>
+  
 
       </div>
       <!-- recientes section start --> 
-      <div class="about_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-8 col-sm-12">
-                  {% block contenido-Principal %}
+{% block contenido-principal %}
 
 
-                  {% endblock %}
-
-                  </div>
-               </div> 
-
-<!------->
-            <div class="col-lg-4 col-sm-12">
-               <div class="newsletter_main">
-                  <h1 class="recent_taital">Posteos Recientes</h1>
-                  {% for entrada in entradas_recientes %}
-                  <div class="recent_box">
-                     <div class="recent_left">
-                        <div class="image_6"><img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" type="image/jpg"></div>
-                     </div>
-                     <div class="recent_right">
-                        <h3 class="consectetur_text">{{ entrada.titulo }}</h3>
-                        <p class="dolor_text">{{ entrada.contenido|slice:":35" }}{% if entrada.contenido|length > 35 %}....{% endif %}
-                           <div class="read_bt"><a href="{% url 'Entradas:entradadetalle' entrada.id %}" style="font-size: 14px;; margin-top: 5px;">Leer Más</a></div>
-
-                        </p>
-                        
-                     </div>
-                  </div>
-                  {% endfor %}
-            </div>
-</div>
-
-      </div>
-      <!-- recientes section end --> 
+{% endblock %}
+<!-- recientes section end --> 
       <!-- blog section start --> 
      
 <div class="about_section layout_padding">
@@ -262,9 +228,9 @@
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
-            <div class="footer_logo"><a href="inicio.html"><img src="images/footer-logo.png"></a></div>
+            <div class="footer_logo"><a href="inicio.html"><img src="{% static 'images/footer-logo.png' %}"></a></div>
             <div class="footer_menu">
-               <ul>
+               <ul>                                                
                   <li><a href="inicio.html">Home</a></li>
                   <li><a href="about.html">Acerca de</a></li>
                   <li><a href="blog.html">Blog</a></li>
@@ -274,10 +240,10 @@
             </div>
             <div class="contact_menu">
                <ul>
-                  <li><a href="#"><img src="images/call-icon.png"></a></li>
-                  <li><a href="#">Call : +01 1234567890</a></li>
-                  <li><a href="blog.html"><img src="images/mail-icon.png"></a></li>
-                  <li><a href="features.html">demo@gmail.com</a></li>
+                  <li><a href="#"><img src="{% static 'images/call-icon.png' %}"></a></li>
+                  <li><a href="#">Call : +54 9 11-5096-0086</a></li>
+                  <li><a href="blog.html"><img src="{% static 'images/mail-icon.png' %}"></a></li>
+                  <li><a href="features.html">guillermo.jaeger@gmail.com</a></li>
                </ul>
             </div>
          </div>
@@ -288,19 +254,19 @@
          <div class="container">
             <p class="copyright_text">Copyright 2020 All Right Reserved By.<a href="https://html.design"> Free  html Templates</a></p>
          </div>
-      </div>
+      </div>                                                         
       <!-- copyright section end -->
       <!-- Javascript files-->
-      <script src="js/jquery.min.js"></script>
-      <script src="js/popper.min.js"></script>
-      <script src="js/bootstrap.bundle.min.js"></script>
-      <script src="js/jquery-3.0.0.min.js"></script>
-      <script src="js/plugin.js"></script>
+      <script src= "{% static 'js/jquery.min.js' %}"></script>
+      <script src= "{% static 'js/popper.min.js' %}"></script>
+      <script src= "{% static 'js/bootstrap.bundle.min.js' %}"></script>
+      <script src= "{% static 'js/jquery-3.0.0.min.js' %}"></script>
+      <script src= "{% static 'js/plugin.js' %}"></script>
       <!-- sidebar -->
-      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="js/custom.js"></script>
+      <script src= "{% static 'js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src= "{% static 'js/custom.js' %}"></script>
       <!-- javascript --> 
-      <script src="js/owl.carousel.js"></script>
+      <script src= "{% static 'js/owl.carousel.js' %}"></script>
       <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
    </body>
 </html>
