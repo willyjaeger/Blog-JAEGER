@@ -1,34 +1,33 @@
 {% extends "padre.html" %}
 {% load static % }
-{% block contenido %}
-
-<br>
-<br>
-<br>
-
+{% block contenido-principal %}
 <div class="container text-center mt-6">
-    <h1>Editar Usuario {{ nombreusuario }}</h1>
+    <h2 class="most_text" style="text-align: center; display: inline-block; margin-right: 10px;">Editar Usuario <br> {{ nombreusuario }}</h2>
+    <div class="about_img" style="display: flex; align-items: center; justify-content: center;">
+        <img src="{{ avatar }}" alt="{{ Avatar }}" class="card-img-top" style="width: 100px; height: 100px;">
+        <a href="{% url 'agregaravatar' %}" class="btn btn-primary" style="margin-left: 10px;">avatar</a>
+    </div>
+</div>
+
+
 
 
     <div class="container">
-        
             <div class="row justify-content-center align-items-center" style="min-height:30vh;">
                     <div class="col-sm-7 ">
                         <form action="{% url 'usuarioeditar' %}" method="POST"> {% csrf_token %}
                             <div class="card-body">
                                 <table>
                                 {{ form.as_table }} 
-                            
                                 </table>
-                                <input type="submit" class="btn btn-primary text-center" value="Guardar">   
-                    
+                                <input type="submit" class="btn btn-primary btn-block" value="Guardar">   
+                                 
                             </div>
                         </form>
-
                     </div>
                     <br>
                     <br>
-                    
+
                     <br>
             </div>
         </div>
@@ -49,7 +48,10 @@
     </div>
 
 
-
+<div class="contenido-personalizado">
+        <!-- Contenido principal de la entrada -->
+        <h2 class="most_text" style="text-align: center;">{{ entrada.titulo }}</h2>
+        <h3 style="text-align: center;">{{ entrada.subtitulo }}</h3>
 
     
 -->

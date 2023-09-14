@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from Entradas.models import Entrada 
+from Inicio.models import Avatar
 
 def posteosRecientes(request):
     entradas_recientes = Entrada.objects.order_by('-id')[:4]  # Obtener las últimas 4 entradas (o las que desees)
@@ -19,3 +20,13 @@ def todaslasEntradas(request):
     entradas = Entrada.objects.all()
     num_entradas = len(entradas)
     return render(request, 'entradalista.html', {'entradas': entradas, 'num_entradas': num_entradas})   
+def obtenerAvatar(request):
+
+
+    avatares=Avatar.objects.filter(user=request.user.id)
+    
+    if len(avatares)!=0:
+        
+        return avatares[0].imagen.url
+    else:
+        return "/media/avatars/avatarpordefecto.png"

@@ -1,49 +1,28 @@
 {% extends "padre.html" %}
 {% load static % }
-{% block contenido %}
-
-<br>
-<br>
-<br>
-
+{% block contenido-principal %}    
 <div class="container text-center mt-6">
-    <h1>Agregando Avatar de {{ nombreusuario }}</h1>
-
+    <h2 class="most_text" style="text-align: center;">Agregando Avatar de {{ usuario }}</h2>
 
     <div class="container">
-        
-            <div class="row justify-content-center align-items-center" style="min-height:30vh;">
-                    <div class="col-sm-7 ">
-                        <form action="{% url 'agregaravatar' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-                            <div class="card-body">
-                                <table>
-                                {{ form.as_table }} 
-                            
-                                </table>
-                                <input type="submit" class="btn btn-primary text-center" value="Agregar Avatar">   
-                    
-                            </div>
-                        </form>
-                    </div>
-                    <br>
-                    <br>
-                    
-                    <br>
+        <div class="row justify-content-center align-items-center" style="min-height:30vh;">
+            <div class="col-sm-7 ">
+                <form action="{% url 'agregaravatar' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }} <!-- Utiliza "as_p" para mostrar el formulario como párrafos -->
+                    <input type="submit" class="btn btn-primary text-center" value="Agregar Avatar">   
+                </form>
             </div>
+            <br>
+            <br>
+            <br>
         </div>
     </div>
 </div>
-
-
-<br>
-<br>
-<br>
-<br>
 {% endblock %}
 
 
 
 
 
-    
--->
+

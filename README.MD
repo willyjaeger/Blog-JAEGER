@@ -16,4 +16,4 @@ Proyecto de un Blog para chicos que jugaron Rugby en Hindu Club de la camada '97
 
 ## Archivos Asociados
 descargate los casos de prueba de la carpeta   https://drive.google.com/drive/folders/1V024ZhC34SKQOlukjUtsrf2KhM3REiC1?usp=sharing
-Descargate el video de demostracion de 
+Descargate el video de demostracion de  https://youtu.be/NW06ihADekM
