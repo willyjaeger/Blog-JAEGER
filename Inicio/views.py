@@ -88,7 +88,6 @@ def register(request):
  
 @login_required
 def usuarioeditar(request):
-    avatar= obtenerAvatar(request)
     usuario = request.user
 
     if request.method == "POST":
