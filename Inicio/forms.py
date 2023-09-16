@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm 
 from django.contrib.auth.models import User
-
+from .models import Avatar
 
 class registro_usuario(UserCreationForm):
     username=forms.CharField(label="Nombre de usuario")
@@ -58,5 +58,9 @@ class EditarUsuarioForm(UserChangeForm):
             self.add_error("confirm_password", "Las contraseñas no coinciden. Por favor, inténtalo de nuevo.")
 
 
-class Avatarform(forms.Form):
-    avatar=forms.ImageField(label="imagen")
+
+
+class Avatarform(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ['imagen']

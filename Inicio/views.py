@@ -162,7 +162,7 @@ def agregaravatar(request):
             
             # Guardar el nuevo avatar
             avatar_nuevo.save()
-            return render(request, "inicio.html", {"mensaje": f"Avatar agregado correctamente", "avatar": obtenerAvatar(request)})
+            return render(request, "Inicio/usuarioeditar.html", {"mensaje": f"Avatar agregado correctamente", "avatar": obtenerAvatar(request)})
         else:
             return render(request, "Inicio/agregaravatar.html", {"form": form, "mensaje": "Error al agregar el avatar"})
     else:
