@@ -122,28 +122,6 @@ def usuarioeditar(request):
 
 
 
-# @login_required
-# def agregaravatar(request):
-#     avatar = obtenerAvatar(request)
-
-#     if request.method == "POST":
-#         form = Avatarform(request.POST, request.FILES)
-#         if form.is_valid():
-#             avatar_nuevo = Avatar(user=request.user, imagen=request.FILES["imagen"])
-
-#             avatar_viejo = Avatar.objects.filter(user=request.user)
-#             if avatar_viejo.exists():
-#                 avatar_viejo[0].delete()
-            
-#             avatar_nuevo.save()
-#             return render(request, "inicio.html", {"mensaje": f"Avatar agregado correctamente", "avatar": obtenerAvatar(request)})
-#         else:
-#             return render(request, "Inicio/agregaravatar.html", {"form": form, "usuario": request.user, "mensaje": "Error al agregar el avatar"})
-#     else:
-#         form = Avatarform()
-#         return render(request, "Inicio/agregaravatar.html", {"form": form, "usuario": request.user, "avatar": obtenerAvatar(request)})
-
-# 
 
 @login_required
 def agregaravatar(request):
@@ -171,5 +149,7 @@ def agregaravatar(request):
         return render(request, "Inicio/agregaravatar.html", {"form": form, "avatar": obtenerAvatar(request)})
 
 
-
-
+@login_required
+def administrador(request):
+    avatar = obtenerAvatar(request)
+    return render(request, "Inicio/administrador.html", {"avatar": avatar}) 

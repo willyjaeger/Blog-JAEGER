@@ -109,6 +109,12 @@
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">logout</a>
                      </li>
+                     {% if user.is_superuser %}
+                     <!-- Botón adicional solo para superusuarios -->
+                     <li class="nav-item">
+                       <a class="nav-link" href="{% url 'administrador' %}">admin</a>
+                     </li>
+                   {% endif %}
                      {% else %}
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Entrar</a>
