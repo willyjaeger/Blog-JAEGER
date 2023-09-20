@@ -64,10 +64,10 @@
       /* Aquí creamos el elemento p con el texto que queremos mostrar */
       .foto p {
         position: absolute;
-        color: rgb(12, 11, 11);
+        color: rgb(251, 247, 247);
         font-family: "Arial", sans-serif;
         font-size: 30px;
-        margin: 5px;
+        margin: 0px;
         text-align: center;
         top: 50%;
         left: 50%;
@@ -112,7 +112,7 @@
                      {% if user.is_superuser %}
                      <!-- Botón adicional solo para superusuarios -->
                      <li class="nav-item">
-                       <a class="nav-link" href="{% url 'administrador' %}">admin</a>
+                       <a class="nav-link" href="{% url 'administrador:administrador' %}">admin</a>
                      </li>
                    {% endif %}
                      {% else %}
@@ -149,17 +149,17 @@
 
 
          <header>
-
+            <style>
+               /* Cambia el margin-top del elemento <header> */
+               header {                   margin-top: 0; /* Cambia el valor del margen superior según tus necesidades */
+               }
+           </style>
+             
             <div class="foto">  <p>Blog de la 97 de Torcuato</p>    </div>
             
          </header>
    <!-- header section end -->
  
-   <div style="text-align: center; margin-bottom: 5px;">
-      <br>
-          <h2 class="most_text">{% block titulo %}    {% endblock %}</h2>
-      
-  </div>
   
 
       </div>
@@ -195,42 +195,7 @@
 
       <!-- tag section start -->
       <!-- tag section end -->
-      <!-- contact section start -->
-      <div class="contact_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                        <div class="carousel-item">
-                           <div class="contact_img"></div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="mail_section">
-                     <h1 class="contact_taital">Contactanos</h1>
-                     <input type="" class="email_text" placeholder="Nombre" name="Name">
-                     <input type="" class="email_text" placeholder="Telefono" name="Phone">
-                     <input type="" class="email_text" placeholder="Email" name="Email">
-                     <textarea class="massage_text" placeholder="Mensaje" rows="5" id="comment" name="Message"></textarea>
-                     <div class="send_bt"><a href="#">enviar</a></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- contact section end -->
+     
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">

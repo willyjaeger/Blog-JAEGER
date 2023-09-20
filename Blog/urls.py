@@ -29,6 +29,7 @@ urlpatterns = [
     path('',include('Entradas.urls')),
     path('',include('Miembros.urls')),
     path('',include('Mensajes.urls')),
+    path('',include('administrador.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
 
          

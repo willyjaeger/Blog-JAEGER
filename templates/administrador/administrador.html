@@ -1,0 +1,64 @@
+{% extends "padre.html" %}
+{% load static %}
+
+{% block contenido-principal %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Administrador</title>
+    <style>
+        body {
+            background-color: #333;
+            color: yellow;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 5px; /* Agrega un margen superior para separar el título del borde superior */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 30vh;
+            margin-bottom: 0px; 
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #038129;
+            color: white; /* Cambia el color del texto a blanco */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Agrega una sombra */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <h2 class="most_text" style="text-align: center; color: yellow;">Menú Administrador</h2>
+        <div class="button-container">
+          <a href="{% url 'administrador:adminusuariolista' %}" class="button">Modifica/Elimina Usuario</a>
+          <a href="#" class="button">Modifica/Elimina Posteo</a>
+        </div>  
+    </div>
+</body>
+</html>
+
+{% endblock %}
+
+
+  

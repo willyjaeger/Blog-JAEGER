@@ -149,7 +149,4 @@ def agregaravatar(request):
         return render(request, "Inicio/agregaravatar.html", {"form": form, "avatar": obtenerAvatar(request)})
 
 
-@login_required
-def administrador(request):
-    avatar = obtenerAvatar(request)
-    return render(request, "Inicio/administrador.html", {"avatar": avatar}) 
+

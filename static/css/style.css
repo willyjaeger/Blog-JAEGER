@@ -272,6 +272,7 @@ button {
     height: auto;
     background-size: 100%;
     background-repeat: no-repeat;
+    margin-top: 0px;
 }
 
 .header_main {

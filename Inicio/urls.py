@@ -13,7 +13,7 @@ urlpatterns = [
     path('Inicio/logout/', LogoutView.as_view(), name="logout"),
     path('Inicio/usuarioeditar/', usuarioeditar, name="usuarioeditar"),
     path('Inicio/agregaravatar/', agregaravatar, name="agregaravatar"),
-    path('Inicio/administrador/', administrador, name="administrador"),
+   
 ]
 
 
