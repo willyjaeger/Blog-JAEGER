@@ -6,16 +6,9 @@ from Inicio.models import Avatar
 from django.contrib.auth.models import User
 from django.urls import reverse
 from .forms import UserEditForm
-# @login_required
-# def adminUsuarioDetalle(request, pk):
-#     avatar = obtenerAvatar(request)
-#     entrada = get_object_or_404(Entrada, pk=pk)
-#     entradas_recientes = posteosRecientes()
-#     return render(request, 'Entradas/entradadetalle.html', {'entrada': entrada, "entradas_recientes": entradas_recientes, "avatar": avatar})
-
-# from .models import Entrada
 from django.shortcuts import render
 
+# # Create your views here.
 @login_required
 def administrador(request):
     avatar= obtenerAvatar(request)
@@ -42,7 +35,7 @@ def adminusuariEditar(request, pk):
         form = UserEditForm(request.POST, request.FILES, instance=usuario)
         if form.is_valid():
             form.save()
-            return redirect('administrador:adminusuarioeditar', pk=usuario.pk)
+            return redirect('administrador:adminusuariolista')
     else:
         form = UserEditForm(instance=usuario)
     return render(request, 'administrador/adminusuarioeditar.html', {'form': form, "avatar": avatar, 'usuario_editado': usuario})
@@ -60,41 +53,47 @@ def adminusuarioEliminar(request, user_id):
 
     return redirect('administrador:adminusuariolista') 
 
+##############################################################################################################
+def adminposteoLista(request):
+    avatar= obtenerAvatar(request)
+    posteos = User.objects.all()     #.order_by('-fecha')
+    print(posteos)  # Verifica si se están recuperando las posteos
+    num_posteos = len(posteos)
+    adminposteolista_url = reverse('administrador:adminposteolista')      # Crea la URL para redireccionar        
+    return render(request, 'administrador/adminposteolistar.html', {'adminposteolista_url': adminposteolista_url, 'posteos': posteos, 'num_posteos': num_posteos,  "avatar": avatar})
+   # return render(request, 'administrador/adminposteolistar.html', {'posteos': posteos, 'num_posteos': num_posteos,  "avatar": avatar})
+
+
+@login_required
+def adminposteoEditar(request, pk):
+    avatar = obtenerAvatar(request)
+    posteo = get_object_or_404(User, pk=pk)  # Obtén el posteo correcto según la clave primaria (pk)
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, request.FILES, instance=posteo)
+        if form.is_valid():
+            form.save()
+            return redirect('administrador:adminposteolista')
+    else:
+        form = UserEditForm(instance=posteo)
+    return render(request, 'administrador/adminposteoeditar.html', {'form': form, "avatar": avatar, 'posteo_editado': posteo})
+  #  return render(request, 'administrador/adminposteoeditar.html', {'form': form, 'posteo_editado': posteo})
+
+
+def adminposteoEliminar(request, user_id):
+    try:
+        posteo = User.objects.get(id=user_id)
+        posteo.delete()
+        messages.success(request, 'El posteo se ha eliminado correctamente.')
+    except User.DoesNotExist:
+     
+        messages.error(request, 'El posteo no existe.')
+
+    return redirect('administrador:adminposteolista') 
 
 
 
 
-# @login_required
-# def adminusuarioCrear(request):
-#     avatar= obtenerAvatar(request)
-#     if request.method == 'POST':
-#         form = EntradaForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             entrada = form.save(commit=False)
-#             entrada.autor = request.user
-#             entrada.save()
-#             messages.success(request, 'Entrada creada con éxito.')  # Agrega un mensaje de éxito
-#             return redirect('Entradas:entradalista')
-
-#     else:
-#         form = EntradaForm()
-    
-#     return render(request, 'Entradas/entradaformulario.html', {'form': form, "avatar": avatar})
 
 
 
 
-# @login_required
-# def adminusuarioEditar(request, pk):
-#     avatar= obtenerAvatar(request)
-#     entrada = get_object_or_404(Entrada, pk=pk)
-#     if request.method == 'POST':
-#         form = EntradaForm(request.POST, request.FILES, instance=entrada)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('Entradas:entradadetalle', pk=entrada.pk)
-#     else:
-#         form = EntradaForm(instance=entrada)
-#     return render(request, 'Entradas/entradaformulario.html', {'form': form, "avatar": avatar})
-
-# # Create your views here.

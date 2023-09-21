@@ -17,7 +17,7 @@
     <div class="container" style="background-color: #333;">
         <div class="row justify-content-center align-items-center" style="min-height: 10vh;">
             <h2 class="most_text" style="text-align: center; color: yellow;">Menú Administrador</h2>
-            <h2 style="text-align: center; color: yellow;">Listado de Usuarios</h2>
+            <h2 style="text-align: center; color: yellow;">Listado de Posteos</h2>
                 <div class="container" style="background-color: #2b22b2;">  
                     <!-- <div class="col-sm-8" style="background-color: #5aac75;">
                        
@@ -31,18 +31,17 @@
                 <thead>
                   <tr>
                     <th style="width: 20%; text-align: center;">Nombre de Usuario</th>
-                    <th style="width: 10%; text-align: center;">Superusuario</th>
+                    <th style="width: 10%; text-align: center;">Superposteo</th>
                     <th style="width: 10%; text-align: center;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for usuario in usuarios %}
+                  {% for posteo in posteos %}
                   <tr>
-                    <td style="text-align: left;">{{ usuario.username }}</td>
-                    <td style="text-align: center;">{% if usuario.is_superuser %}Sí{% else %}No{% endif %}</td>
-                    <td>
-                      <a href="{% url 'administrador:adminusuarioeditar' usuario.id %}" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; margin-right: 10px; display: inline-block;">Editar</a>
-                      <form method="post" action="{% url 'administrador:adminusuarioeliminar' usuario.id %}" style="display: inline-block;">
+                    <td style="text-align: left;">{{ posteo.username }}</td>
+                    
+                      <a href="{% url 'administrador:adminposteoeditar' posteo.id %}" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; margin-right: 10px; display: inline-block;">Editar</a>
+                      <form method="post" action="{% url 'administrador:adminposteoeliminar' posteo.id %}" style="display: inline-block;">
                         {% csrf_token %}
                         <button type="submit" style="background-color: #dc3545; color: white; padding: 5px 10px; text-decoration: none; border: none;">Borrar</button>
                       </form>

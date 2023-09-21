@@ -38,7 +38,7 @@
    <style>
       /* Puedes cambiar el estilo de la cabecera según tus preferencias */
       header {
-        background-color: #f0f0f0;
+        background-color: #333;
         padding: 20px;
         text-align: center;
       }
@@ -134,13 +134,14 @@
 
 </head>
 <div style="display: flex; justify-content: flex-end;">
-   <div style="flex: 1; text-align: right; max-width: 94%;">
+   <div style="flex: 1; text-align: right; max-width: 94%; margin-top: 7px;">
       <h3>¡Hola {{ user.username }}!</h3>
    </div>
    <div style="flex: 2; text-align: center; max-width: 5%;">
       {% block avatar %} {% endblock %}
-       <img src="{{ avatar }}" alt="" style="width: 30px; height: 30px;">
-   </div>
+      <img src="{{ avatar }}" alt="" style="width: 40px; height: 40px; margin-top: 3px;">
+  </div>
+  
 </div>
 
      
