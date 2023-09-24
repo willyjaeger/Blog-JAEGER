@@ -1,0 +1,34 @@
+{% extends 'padre.html' %}
+
+{% block contenido-principal %}
+<div style="background-color: #333; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100vh;">
+    <h2 style="margin-bottom: 20px; color: yellow;">Editar Usuario</h2>
+    <form method="post" style="display: flex; justify-content: center; align-items: flex-start;">
+        {% csrf_token %}
+        <div style="display: flex; flex-direction: column; margin-right: 20px; align-items: flex-start;">
+            <label for="fecha" style="margin-top: 5px; margin-bottom: 33px;">Fecha:</label>
+            <label for="titulo" style="margin-bottom: 33px;">Titulo:</label>
+            <label for="subtitulo" style="margin-bottom: 32px;">Subtitulo:</label>
+            <label for="autor" style="margin-bottom: 25px;">Autor:</label>
+            <label for="contenido" style="margin-top: 5px; margin-bottom: 20px;">Contenido:</label>
+
+            <label for="imagen" style="margin-bottom: 10px;">Imagen:</label>
+            <!-- Otros campos del formulario, como email, nombre, etc., siguiendo el mismo patrón -->
+        </div> 
+        
+        <div style="display: flex; flex-direction: column;align-items: flex-start;">
+            <input type="text" name="fecha" id="fecha" value="{{ posteo_editado.fecha }}" style="margin-bottom: 20px; padding: 5px; border: 1px solid #ccc;">
+            <input type="text" name="titulo" id="titulo" value="{{ posteo_editado.titulo }}"style="margin-bottom: 20px; padding: 5px; border: 1px solid #ccc;">
+            <input type="text" name="subtitulo" id="subtitulo" value="{{ posteo_editado.subtitulo }}" style="margin-bottom: 20px; padding: 5px; border: 1px solid #ccc;">
+            <input type="text" name="autor" id="autor" value="{{ posteo_editado.autor }}" style="margin-bottom: 20px; padding: 5px; border: 1px solid #ccc;">
+            <input type="text" name="contenido" id="contenido" value="{{ posteo_editado.contenido }}" style="margin-bottom: 20px; padding: 5px; border: 1px solid #ccc;">
+
+
+            <input type="text" name="imagen" id="imagen" value="{{ posteo_editado.imagen }}" style="margin-bottom: 20px;">
+            <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer;">Guardar Cambios</button>
+
+        </div>
+    </form>
+    <a href="{% url 'administrador:administrador' %}" style="color: #007bff; text-decoration: none; margin-top: 20px; display: block;">Salir</a>
+</div>
+{% endblock %}

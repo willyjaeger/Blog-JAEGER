@@ -21,7 +21,7 @@
                         <h3 style="text-align: center;">{{ entrada.subtitulo }}</h3>
                         <p class="post_text">Autor: {{ entrada.autor }}  -  Fecha de Creación: {{ entrada.fecha }}</p>
                         
-                        <!-- Establece el ancho de la imagen al 100% -->
+                       
                         <img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" style="width: 100%;">
                         <br>
                         <h2 style="text-align: center;">{{ entrada.contenido }} </h3>
@@ -31,26 +31,7 @@
 
 
                     </div>
-      <!-----Sector derecho de la pantalla, con los ultimos posteos-->
-                <!-- <div class="col-lg-4 col-sm-12">
-                    <div class="newsletter_main">
-                    <h1 class="recent_taital">Posteos Recientes</h1>
-                    {% for entrada in entradas_recientes %}
-                    <div class="recent_box">
-                        <div class="recent_left">
-                            <div class="image_6"><img src="{{ entrada.imagen.url }}" alt="{{ entrada.titulo }}" type="image/jpg"></div>
-                        </div>
-                        <div class="recent_right">
-                            <h3 class="consectetur_text">{{ entrada.titulo }}</h3>
-                            <p class="dolor_text">{{ entrada.contenido|slice:":35" }}{% if entrada.contenido|length > 35 %}....{% endif %}
-                                <div class="read_bt"><a href="{% url 'Entradas:entradadetalle' entrada.id %}" style="font-size: 14px;; margin-top: 5px;">Leer Más</a></div>
-
-                            </p>
-                            
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>   -->
+     
             </div>      
      </div>
   </div>

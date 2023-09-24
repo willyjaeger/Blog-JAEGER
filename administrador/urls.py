@@ -15,7 +15,8 @@ urlpatterns = [
     path('administrador/adminusuarioeditar/<int:pk>/', views.adminusuariEditar, name='adminusuarioeditar'),
     path('administrador/adminusuarioeliminar/<int:user_id>/', views.adminusuarioEliminar, name='adminusuarioeliminar'),  
     path('administrador/adminposteoeditar/<int:pk>/', views.adminposteoEditar, name='adminposteoeditar'),
-    path('administrador/adminposteoeliminar/<int:user_id>/', views.adminposteoEliminar, name='adminposteoeliminar'),      
+    path('administrador/adminposteoeliminar/<int:user_id>/', views.adminposteoEliminar, name='adminposteoeliminar'), 
+    path('administrador/adminposteolistar/', views.adminposteoLista, name='adminposteolista'),    
 ]
 
 

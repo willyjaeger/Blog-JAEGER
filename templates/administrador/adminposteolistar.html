@@ -27,19 +27,22 @@
     </div>
     <div class="container" style="background-color: #333;">
         <div class="row justify-content-center align-items-center" style="min-height: 30vh;">
-            <table style="width: 50%; margin: 0 auto; color: rgb(255, 255, 255);">
+            <table style="width: 100%; margin: 0 auto; color: rgb(255, 255, 255);">
                 <thead>
                   <tr>
-                    <th style="width: 20%; text-align: center;">Nombre de Usuario</th>
-                    <th style="width: 10%; text-align: center;">Superposteo</th>
-                    <th style="width: 10%; text-align: center;">Acciones</th>
+                    <th style="width: 20%; text-align: center;">Fecha</th>
+                    <th style="width: 40%; text-align: center;">Titulo</th>
+                    <th style="width: 20%; text-align: center;">Autor</th>
+                    <th style="width: 20%; text-align: center;">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
                   {% for posteo in posteos %}
                   <tr>
-                    <td style="text-align: left;">{{ posteo.username }}</td>
-                    
+                    <td style="text-align: left;">{{ posteo.fecha }}</td>
+                    <td style="text-align: left;">{{ posteo.titulo }}</td>
+                    <td style="text-align: left;">{{ posteo.autor }}</td>
+                    <td style="text-align: center;">
                       <a href="{% url 'administrador:adminposteoeditar' posteo.id %}" style="background-color: #007bff; color: white; padding: 5px 10px; text-decoration: none; margin-right: 10px; display: inline-block;">Editar</a>
                       <form method="post" action="{% url 'administrador:adminposteoeliminar' posteo.id %}" style="display: inline-block;">
                         {% csrf_token %}
@@ -48,6 +51,7 @@
                     </td>
                   </tr>
                   {% endfor %}
+
                 </tbody>
               </table>
              
