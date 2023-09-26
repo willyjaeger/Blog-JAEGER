@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+{% load static%}
+{% block contenido-principal %}
+
+<div style="background-color: #333; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 100vh;">
+    <h2 style="margin-bottom: 20px; color: yellow;">Acerca de mi</h2>
+    
+    <form  enctype="multipart/form-data" style="max-height: 80vh; overflow-y: auto; width: 100%; display: grid; grid-template-columns: 1fr 2fr; column-gap: 5px; align-items: center;">
+
+        <!-- Columna de la izquierda con la imagen -->
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <!-- Contenedor de la imagen actual -->
+            <div id="image-container" style="margin-bottom: 10px;">
+                <img src="{% static 'images/Otra foto mia.jpg' %}" alt="Descripción de la imagen" style="max-width: 100%; height: auto; cursor: pointer;">
+            </div>
+        </div>
+        
+        <!-- Columna de la derecha con los labels -->
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <p>Soy un apasionado padre de familia de 59 años,  Empresario,  Fotografo y Desarrollador Visual Basic. Manejo mi empresa de Alimentos Provedora de Grandes cadenas en Buenos Aires. El Programa de Ventas de mi Empresa fue desarrollado por mi, y el mismo sigue aun en uso (aunque algo emparchado). Durante muchos años acompañé a mi hijo en su crecimiento con el Rugby, y de ahí la creación de este Blog.</p>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
