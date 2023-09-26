@@ -8,6 +8,7 @@ from django.urls import reverse
 from .forms import UserEditForm
 from django.shortcuts import render
 from Entradas.models import Entrada 
+from .forms import EntradaEditForm  # Importa el nuevo formulario
 
 # # Create your views here.
 @login_required
@@ -76,28 +77,33 @@ def adminposteoLista(request):
 #         form = UserEditForm(instance=posteo)
 #     return render(request, 'administrador/adminposteoeditar.html', {'form': form, "avatar": avatar, 'posteo_editado': posteo})
  
-@login_required
-def adminposteoEditar(request, pk):
-    avatar = obtenerAvatar(request)
-    posteo = get_object_or_404(Entrada, pk=pk)
-    usuario = request.user
-    avatar_autor = Avatar.objects.get(user_id=posteo.autor.id)  # Obtén el avatar del autor
 
-    if request.method == 'POST':
-        form = UserEditForm(request.POST, request.FILES, instance=posteo)
-        if form.is_valid():
-            form.save()
-            return redirect('administrador:adminposteolista')
-    else:
-        form = UserEditForm(instance=posteo)
 
-    return render(request, 'administrador/adminposteoeditar.html', {
-        'form': form,
-        'avatar': avatar,
-        'posteo_editado': posteo,
-        'usuario': usuario,
-        'avatar_autor': avatar_autor,
-    })
+# @login_required
+# def adminposteoEditar(request, pk):
+#     avatar = obtenerAvatar(request)
+#     posteo = get_object_or_404(Entrada, pk=pk)
+#     usuario = request.user
+#     avatar_autor = Avatar.objects.get(user_id=posteo.autor.id)  # Obtén el avatar del autor
+
+#     if request.method == 'POST':
+#         form = UserEditForm(request.POST, request.FILES, instance=posteo)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('administrador:adminposteolista')
+#         else:
+#             print("Formulario no válido. Errores:", form.errors)
+#     else:
+#         form = UserEditForm(instance=posteo)
+
+#     return render(request, 'administrador/adminposteoeditar.html', {
+#         'form': form,
+#         'avatar': avatar,
+#         'posteo_editado': posteo,
+#         'usuario': usuario,
+#         'avatar_autor': avatar_autor,
+#     })
+
 
 
 
@@ -137,6 +143,30 @@ def adminposteoEliminar(request, user_id):
     return redirect('administrador:adminposteolista') 
 
 
+
+
+@login_required
+def adminposteoEditar(request, pk):
+    avatar = obtenerAvatar(request)
+    posteo = get_object_or_404(Entrada, pk=pk)
+    usuario = request.user
+    avatar_autor = Avatar.objects.get(user_id=posteo.autor.id)
+
+    if request.method == 'POST':
+        form = EntradaEditForm(request.POST, request.FILES, instance=posteo)  # Utiliza el nuevo formulario
+        if form.is_valid():
+            form.save()
+            return redirect('administrador:adminposteolista')
+    else:
+        form = EntradaEditForm(instance=posteo)  # Utiliza el nuevo formulario
+
+    return render(request, 'administrador/adminposteoeditar.html', {
+        'form': form,
+        'avatar': avatar,
+        'posteo_editado': posteo,
+        'usuario': usuario,
+        'avatar_autor': avatar_autor,
+    })
 
 
 

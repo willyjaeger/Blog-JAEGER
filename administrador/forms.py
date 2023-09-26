@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from Entradas.models import Entrada
 
 class UserEditForm(forms.ModelForm):
     class Meta:
@@ -13,3 +14,11 @@ class UserEditForm(forms.ModelForm):
         if User.objects.filter(username=username).exclude(id=user_id).exists():
             raise forms.ValidationError('Este nombre de usuario ya está en uso.')
         return username
+
+
+class EntradaEditForm(forms.ModelForm):
+    class Meta:
+        model = Entrada
+        exclude = ['fecha']  # Excluye el campo 'fecha' del formulario
+        fields = ['titulo', 'subtitulo', 'contenido', 'imagen', 'autor']
+

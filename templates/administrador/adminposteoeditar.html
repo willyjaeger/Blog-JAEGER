@@ -1,43 +1,23 @@
 {% extends 'padre.html' %}
-{% load static %}
+
 {% block contenido-principal %}
-<script src="{% static 'js/blog-js.js' %}"></script>
-<div style="background-color: #333; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 100vh;">
-    <h2 style="margin-bottom: 20px; color: yellow;">Editar Entrada</h2>
-   
-    <div style="display: flex; align-items: center;">
-        <p>Autor actual: &nbsp; {{ posteo_editado.autor.username }}</p>
-        <div style="margin-left: 2px; border: 2px solid #ccc; border-radius: 5px; padding: 5px;margin-bottom: 10px;">
-            <img src="{{ avatar_autor.imagen.url }}" alt="Avatar del autor" width="100">
-        </div>
-    </div>
 
 
-    
-    <form method="post" enctype="multipart/form-data" style="max-height: 80vh; overflow-y: auto; width: 100%; display: grid; grid-template-columns: 3fr 1fr 3fr; column-gap: 5px; align-items: center;">
+<div style="background-color: #333; color: white; padding: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; height: 100vh;">
+    <h2 style="margin-bottom: 20px; color: yellow;">Editar Posteo</h2>
+    <form method="post" style="display: flex; justify-content: center; align-items: flex-start;">
         {% csrf_token %}
-        
-        <!-- Columna de la izquierda con la imagen -->
-        <div style="display: flex; flex-direction: column; margin-right: 20px; align-items: flex-start; width: 80%; height: 100%; overflow: hidden;">
-            <!-- Contenedor de la imagen actual -->
-            <div id="image-container" style="margin-bottom: 10px;">
-                <img src="{{ posteo_editado.imagen.url }}" alt="Imagen del posteo" style="max-width: 100%; height: auto; cursor: pointer;">
+        <div style="display: flex; align-items: center;">
+            <p>Autor actual: &nbsp; {{ posteo_editado.autor.username }}</p>
+
+
+            <div style="margin-left: 2px; border: 2px solid #ccc; border-radius: 5px; padding: 5px;margin-bottom: 10px;">
+                <img src="{{ avatar_autor.imagen.url }}" alt="Avatar del autor" width="100">
             </div>
-
-            <!-- Botón para seleccionar una nueva imagen -->
-            <label for="nueva_imagen" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; text-align: center; margin-bottom: 10px;">
-                Cambiar Imagen
-                <input type="file" name="nueva_imagen" id="nueva_imagen" accept="image/*" style="display: none;">
-            </label>
-
-            <!-- Campo oculto para almacenar el nombre de la imagen actual -->
-            <input type="hidden" name="imagen_actual" value="{{ posteo_editado.imagen.url }}">
         </div>
 
 
 
-
-        <!-- Columna del medio con los labels -->
         <div style="display: flex; flex-direction: column; margin-right: 4px; margin-left: 20px; align-items: flex-start;">
             <label for="fecha" style="margin-top: 0px; margin-bottom: 25px;">Fecha:</label>
             <label for="titulo" style="margin-bottom: 25px;">Titulo:</label>
@@ -46,8 +26,7 @@
             
             <label for="nuevo_autor" style="margin-bottom:0px;">Nuevo Autor:</label>
         </div>
-    
-        <!-- Columna de la derecha con los campos de entrada -->
+        
         <div style="display: flex; flex-direction: column; align-items: left;">
             <input type="text" name="fecha" id="fecha" value="{{ posteo_editado.fecha|date:'l, j F Y' }}" style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; width: 100%;">
             <!-- Aumenta el ancho de los campos "titulo" y "subtitulo" sin cambiar el tamaño de fuente -->
@@ -55,68 +34,10 @@
             <input type="text" name="subtitulo" id="subtitulo" value="{{ posteo_editado.subtitulo }}" style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; width: 100%;">
             <!-- Cambia el campo "contenido" a un textarea -->
             <textarea name="contenido" id="contenido" style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; width: 100%; height: 70px;">{{ posteo_editado.contenido }}</textarea>
-                       
-            <!-- Agregar un menú desplegable para seleccionar el nuevo autor -->
-            <select name="nuevo_autor" id="nuevo_autor" style="margin-bottom: 10px; padding: 5px; border: 1px solid #ccc; width: 100%;">
-                {% for usuario in usuarios %}
-                    <option value="{{ usuario.id }}" {% if usuario.id == posteo_editado.autor.id %}selected{% endif %}>{{ usuario.username }}</option>
-                {% endfor %}
-            </select>
-            
-            <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer;">Guardar Cambios</button>
+                      
+            <button type="submit" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer;">Guardar Cambios {{pk}}</button>
         </div>
-<!-- Agrega el script JavaScript aquí -->
-<!-- Agrega el script JavaScript aquí -->
-<!-- Agrega el script JavaScript aquí -->
-<script>
-    // Obtén referencias a los elementos HTML relevantes
-    const nuevaImagenInput = document.getElementById("nueva_imagen");
-    const imagenActual = document.getElementById("imagen-actual");
-    const imageContainer = document.getElementById("image-container");
-    const imagenActualInput = document.getElementById("imagen_actual");
-
-    // Al cargar la página, muestra la imagen actual en el contenedor
-    mostrarImagenActual();
-
-    // Agrega un evento de cambio al input de nueva imagen
-    nuevaImagenInput.addEventListener("change", (e) => {
-        const selectedFile = e.target.files[0];
-        if (selectedFile) {
-            // Cambia la imagen en el contenedor de imagen actual
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const newImage = document.createElement("img");
-                newImage.src = event.target.result;
-                newImage.alt = "Nueva Imagen";
-                newImage.style.maxWidth = "100%";
-                newImage.style.height = "auto";
-                imageContainer.innerHTML = ""; // Limpia el contenedor existente
-                imageContainer.appendChild(newImage);
-
-                // Actualiza el valor del campo de imagen actual oculto
-                imagenActualInput.value = selectedFile.name;
-            };
-            reader.readAsDataURL(selectedFile);
-        }
-    });
-
-    // Función para mostrar la imagen actual en el contenedor
-    function mostrarImagenActual() {
-        const currentImage = document.createElement("img");
-        currentImage.src = imagenActualInput.value; // Obtiene la URL de la imagen actual
-        currentImage.alt = "Imagen Actual";
-        currentImage.style.maxWidth = "100%";
-        currentImage.style.height = "auto";
-        imageContainer.innerHTML = ""; // Limpia el contenedor existente
-        imageContainer.appendChild(currentImage);
-    }
-</script>
-
-
-
-      
     </form>
-    
     <a href="{% url 'administrador:administrador' %}" style="color: #007bff; text-decoration: none; margin-top: 20px; display: block;">Salir</a>
 </div>
 {% endblock %}
