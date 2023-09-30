@@ -150,6 +150,6 @@ def agregaravatar(request):
 
 
 def about(request):
-    # Código para la vista "about"
-    return render(request, 'Inicio/about.html')
+
+    return render(request, 'Inicio/about.html', { "avatar": obtenerAvatar(request)})
 
